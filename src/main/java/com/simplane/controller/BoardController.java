@@ -53,7 +53,7 @@ public class BoardController {
         log.info("boardid: " + board.getBoardid());
         log.info("title: " + board.getTitle());
         log.info("content: " + board.getContent());
-        log.info("imagePath: " + board.getImagePath());
+
 
         if(service.modify(board)) {
             rttr.addFlashAttribute("result", "수정 되었습니다.");
@@ -91,4 +91,5 @@ public class BoardController {
     @GetMapping("/register")
     public void register(){
     }
+
 }

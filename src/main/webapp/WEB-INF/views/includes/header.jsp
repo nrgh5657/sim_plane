@@ -86,7 +86,7 @@
 <body>
 <header>
 
-    <div id="logo"><img src="/img01/로고.JPG"></div>
+    <div id="logo"></div>
 
     <div id="login">
 
@@ -104,7 +104,7 @@
 
     <nav>
         <ul>
-            <li><a href="#">심리테스트</a></li>
+            <li><a href="/test/testlist">심리테스트</a></li>
             <li><a href="#">운세</a></li>
             <li><a href="#">궁합</a></li>
             <li><a href="#">포춘쿠키</a></li>
@@ -112,4 +112,6 @@
         </ul>
     </nav>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 </header>

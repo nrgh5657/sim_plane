@@ -10,20 +10,20 @@
 <section>
 	<article>
 		<h3>짱구는못말려</h3>
-		<a href="#"><img src="img01/짱구.jpg"></a>
+		<a href="#"></a>
 	</article>
 	<article>
 		<h3>명탐정코난</h3>
-		<a href="#"><img src="img01/코난.jpg"></a>
+		<a href="#"></a>
 	</article>
 	<article>
 		<h3>약사의 혼잣말</h3>
-		<a href="#"><img src="img01/약사.JPG"></a>
+		<a href="#"></a>
 	</article>
 	</article>
 	<article>
 		<h3>나혼자만 레벨업업</h3>
-		<a href="#"><img src="img01/레벨.JPG"></a>
+		<a href="#"></a>
 	</article>
 </section>
 

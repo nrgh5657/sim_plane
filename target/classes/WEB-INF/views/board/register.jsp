@@ -1,47 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-    
-    
+         pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../includes/header.jsp" %>
 
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">Tables</h1>
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Board Register
-            </div>
-            <!-- /.panel-heading -->
-            <div class="panel-body">
-                <form action="/board/register" method="post">
-                   <div class="form-group">
-                   		<label>Title</label><input class="form-control" name="title">
-                   </div>
-                   <div class="form-group">
-	                   <label>Text area</label>
-	                   <textarea row="3" class="form-control" name="content"></textarea>
-                   </div>
-                   <div class="form-group">
-                   		<label>Writer</label><input class="form-control" name="writer">
-                   </div>
-                   <button class="btn btn-info" type="submit">Submit Button</button>
-                   <button class="btn btn-default" type="reset">Reset Button</button>
-                </form>
-            </div>
-            <!-- /.panel-body -->
-        </div>
-        <!-- /.panel -->
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
-            
+<h2>새 글 작성</h2>
+<form action="register.do" method="post" enctype="multipart/form-data" class="board">
+    <p>제목: <input type="text" name="title" required /></p>
+    <p>작성자: <input type="text" name="writer" required /></p>
+    <p>내용: <textarea name="content" required></textarea></p>
+    <%--<p>이미지 업로드: <input type="file" name="uploadFile" /></p>--%>
+    <input type="submit" value="등록" />
+</form>
+<a href="list.do">목록으로</a>
+
 <%@ include file="../includes/footer.jsp" %>
