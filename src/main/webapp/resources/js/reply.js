@@ -25,12 +25,12 @@ let replyService = (function(){
     } //end add
 
     function getList(param, callback, error) {
-        let bno = param.bno;
+        let testid = param.testid;
         let page = param.page || 1;  //page값 없으면 1값 입력
 
         $.ajax({
             type: 'get', 
-            url: '/replies/pages/'+bno+"/"+page, 
+            url: '/replies/pages/'+testid+"/"+page,
             success : function(result, status, xhr) {
                 if(callback) {
                     callback(result.replyCnt, result.list);
@@ -44,11 +44,11 @@ let replyService = (function(){
         })
     }//end getList
 
-    function remove(rno, callback, error) {
+    function remove(replyid, callback, error) {
 
         $.ajax({
             type:'delete',
-            url:'/replies/'+rno,
+            url:'/replies/'+replyid,
 
             success: function(deleteResult, status, xhr) {
                 if(callback) {
@@ -63,10 +63,10 @@ let replyService = (function(){
         })
     }//end remove
 
-    function get(rno, callback, error) {
+    function get(replyid, callback, error) {
         $.ajax({
             type:'get',
-            url: '/replies/'+rno,
+            url: '/replies/'+replyid,
             success: function(result, status, xhr){
                 if(callback){
                     callback(result);
@@ -83,7 +83,7 @@ let replyService = (function(){
     function update(reply, callback, error) {
         $.ajax({
             type:'put',
-            url:'/replies/' + reply.rno,
+            url:'/replies/' + reply.replyid,
             data: JSON.stringify(reply),
             contentType : "application/json; charset=utf-8",
             success: function(result, status, xhr){

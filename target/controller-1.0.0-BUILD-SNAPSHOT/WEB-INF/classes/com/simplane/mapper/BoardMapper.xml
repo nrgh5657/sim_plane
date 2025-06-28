@@ -63,7 +63,7 @@
     </insert>
 
     <insert id="createSelectKey">
-        <selectKey keyProperty="boardid" order="BEFORE" resultType="Long">
+        <selectKey keyProperty="boardid" order="AFTER" resultType="Long">
             select last_insert_id()
         </selectKey>
         insert into sim_board(title, content, writer, imagePath)

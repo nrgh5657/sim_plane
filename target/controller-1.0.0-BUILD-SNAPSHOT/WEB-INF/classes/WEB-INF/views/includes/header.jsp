@@ -104,7 +104,7 @@
 
     <nav>
         <ul>
-            <li><a href="/test/testlist">심리테스트</a></li>
+            <li><a href="/test/list">심리테스트</a></li>
             <li><a href="#">운세</a></li>
             <li><a href="#">궁합</a></li>
             <li><a href="#">포춘쿠키</a></li>
