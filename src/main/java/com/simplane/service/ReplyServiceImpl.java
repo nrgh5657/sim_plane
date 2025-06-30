@@ -5,6 +5,7 @@ import com.simplane.domain.ReplyVO;
 import com.simplane.dto.ReplyPageDTO;
 import com.simplane.mapper.BoardMapper;
 import com.simplane.mapper.ReplyMapper;
+import com.simplane.mapper.TestMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ import java.util.List;
 public class ReplyServiceImpl implements ReplyService {
 
     private final ReplyMapper mapper;
-    private final BoardMapper boardMapper;
+    private final TestMapper testMapper;
 
 
     @Override
@@ -31,8 +32,8 @@ public class ReplyServiceImpl implements ReplyService {
     }
 
     @Override
-    public ReplyPageDTO getListPage(Criteria cri, Long boardid) {
-        List<ReplyVO> list = mapper.getListWithPaging(cri, boardid);
+    public ReplyPageDTO getListPage(Criteria cri, Long testid) {
+        List<ReplyVO> list = mapper.getListWithPaging(cri, testid);
         return new ReplyPageDTO(list);
     }
 
@@ -47,7 +48,7 @@ public class ReplyServiceImpl implements ReplyService {
     }
 
     @Override
-    public List<ReplyVO> getList(Criteria cri, Long boardid) {
-        return mapper.getListWithPaging(cri, boardid);
+    public List<ReplyVO> getList(Criteria cri, Long testid) {
+        return mapper.getListWithPaging(cri, testid);
     }
 }

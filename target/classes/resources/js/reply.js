@@ -22,6 +22,7 @@ let replyService = (function(){
                 }
             }
         })
+        console.log("reply.....................");
     } //end add
 
     function getList(param, callback, error) {

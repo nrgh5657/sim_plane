@@ -88,7 +88,7 @@
 <body>
 <header>
 
-    <div id="logo"></div>
+    <div id="logo"><a href="/">로고</a></div>
 
     <div id="login">
 

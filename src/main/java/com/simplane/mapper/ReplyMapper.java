@@ -15,7 +15,7 @@ public interface ReplyMapper {
     public int update(ReplyVO reply); //댓글 수정
 
     //댓글 페이징 처리
-    public List<ReplyVO> getListWithPaging(@Param("cri") Criteria cri, @Param("boardid") Long boardid);
+    public List<ReplyVO> getListWithPaging(@Param("cri") Criteria cri, @Param("testid") Long testid);
 
     public int delete(Long replyid); // 댓글 삭제
 
