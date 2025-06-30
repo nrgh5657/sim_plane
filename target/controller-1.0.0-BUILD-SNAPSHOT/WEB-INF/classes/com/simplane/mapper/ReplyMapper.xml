@@ -23,4 +23,12 @@
         where replyid = #{replyid}
     </update>
 
+    <select id="getListWithPaging" resultType="com.simplane.domain.ReplyVO">
+        SELECT replyid, testid, replyer, reply, replyDate
+        FROM sim_reply
+        WHERE boardid = #{boardid}
+        ORDER BY replyid DESC
+        LIMIT #{cri.amount} OFFSET #{cri.offset}
+    </select>
+
 </mapper>
