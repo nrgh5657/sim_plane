@@ -2,8 +2,7 @@ package com.simplane.service;
 
 import com.simplane.domain.Criteria;
 import com.simplane.domain.ReplyVO;
-import com.simplane.dto.ReplyPageDTO;
-import com.simplane.mapper.BoardMapper;
+import com.simplane.domain.ReplyPageDTO;
 import com.simplane.mapper.ReplyMapper;
 import com.simplane.mapper.TestMapper;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +22,7 @@ public class ReplyServiceImpl implements ReplyService {
 
     @Override
     public int register(ReplyVO vo) {
+
         return mapper.create(vo);
     }
 
@@ -33,8 +33,7 @@ public class ReplyServiceImpl implements ReplyService {
 
     @Override
     public ReplyPageDTO getListPage(Criteria cri, Long testid) {
-        List<ReplyVO> list = mapper.getListWithPaging(cri, testid);
-        return new ReplyPageDTO(list);
+        return new ReplyPageDTO(mapper.getCountByTestid(testid), mapper.getListWithPaging(cri, testid));
     }
 
     @Override

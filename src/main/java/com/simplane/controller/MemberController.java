@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Controller
 @Log4j
@@ -57,13 +58,17 @@ public class MemberController {
             return "board/signup";  // 중복 아이디면 가입 폼 다시 출력
         }
 
-        // 2. birthdate 문자열 → java.sql.Date 변환 시도
         Date sqlBirthdate;
         try {
-            sqlBirthdate = Date.valueOf(birthdate);  // yyyy-MM-dd 형식이어야 함
+            sqlBirthdate = Date.valueOf(birthdate); // yyyy-MM-dd 형식이어야 함
+            LocalDate parsedDate = sqlBirthdate.toLocalDate();
+            if (parsedDate.isAfter(LocalDate.now())) {
+                model.addAttribute("errorMsg", "생년월일은 미래일 수 없습니다.");
+                return "board/signup";
+            }
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMsg", "생년월일 형식이 올바르지 않습니다.");
-            return "/board/signup";  // 형식 오류시 가입 폼 다시 출력
+            return "board/signup";
         }
 
         // 3. MemberVO 객체 생성 및 데이터 세팅

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ include file="../includes/header.jsp" %>
 
 <div class="container">
@@ -29,8 +30,16 @@
     </tr>
   </table>
 
-  <button data-oper='modify' class="btn btn-info">수정</button>
-  <button data-oper='list' class="btn btn-default">목록</button>
+
+  <sec:authentication property="principal" var="pinfo" />
+
+  <sec:authorize access="isAuthenticated()">
+    <c:if test="${pinfo.username eq board.writer}">
+      <button data-oper='modify' class="btn btn-info">수정</button>
+      <button data-oper='list' class="btn btn-default">목록</button>
+    </c:if>
+  </sec:authorize>
+
 
   <form id="operForm" action="/board/modify" method="get">
     <input type="hidden" id="boardid" name="boardid" value='<c:out value="${board.boardid}" />'>

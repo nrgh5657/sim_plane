@@ -1,141 +1,111 @@
 console.log("Reply Module............");
 
-//즉시 실행 함수
-let replyService = (function(){
+let replyService = (function() {
 
-    function add(reply, callback){  //비동기 통신
-        console.log("reply.....................");
-
-        $.ajax({  //앞에도 따옴표가 붙으면 json 객체, 없으면 js객체
-            type : 'post',
-            url : '/replies/new',
-            data : JSON.stringify(reply),  //reply(js객체)를 json으로 변환
-            contentType : "application/json; charset=utf-8", 
-            success : function(result, status, xhr) {
-                if(callback) {
-                    callback(result);
-                }
-            },
-            error : function(xhr, status, er) {
-                if (error) {
-                    error(er);
-                }
-            }
-        })
-        console.log("reply.....................");
-    } //end add
-
-    function getList(param, callback, error) {
-        let testid = param.testid;
-        let page = param.page || 1;  //page값 없으면 1값 입력
-
+    // 댓글 등록
+    function add(reply, callback, error) {
         $.ajax({
-            type: 'get', 
-            url: '/replies/pages/'+testid+"/"+page,
-            success : function(result, status, xhr) {
-                if(callback) {
-                    callback(result.replyCnt, result.list);
-                }
-            },
-            error : function(xhr, status, er) {
-                if (error) {
-                    error(er);
-                }
-            }
-        })
-    }//end getList
-
-    function remove(replyid, callback, error) {
-
-        $.ajax({
-            type:'delete',
-            url:'/replies/'+replyid,
-
-            success: function(deleteResult, status, xhr) {
-                if(callback) {
-                    callback(deleteResult);
-                }
-            },
-            error : function(xhr, status, er) {
-                if (error) {
-                    error(er);
-                }
-            }
-        })
-    }//end remove
-
-    function get(replyid, callback, error) {
-        $.ajax({
-            type:'get',
-            url: '/replies/'+replyid,
-            success: function(result, status, xhr){
-                if(callback){
-                    callback(result);
-                }
-            },
-            error: function(xhr, status, err){
-                if(error) {
-                    error(err);
-                }
-            }
-        })
-    }//end get
-
-    function update(reply, callback, error) {
-        $.ajax({
-            type:'put',
-            url:'/replies/' + reply.replyid,
+            type: 'post',
+            url: '/replies/new',
             data: JSON.stringify(reply),
-            contentType : "application/json; charset=utf-8",
-            success: function(result, status, xhr){
-                if(callback) {
-                    callback(result);
-                }
+            contentType: 'application/json; charset=utf-8',
+            success: function(result) {
+                if (callback) callback(result, reply);
             },
             error: function(xhr, status, err) {
-                if(error){
-                    error(err);
-                }
+                if (error) error(err);
             }
-        })
+        });
     }
 
+    // 댓글 목록 불러오기 (페이징 포함)
+    function getList(param, callback, error) {
+        let testid = param.testid;
+        let page = param.page || 1;
+
+        $.ajax({
+            type: 'get',
+            url: '/replies/pages/' + testid + '/' + page,
+            success: function(result) {
+                if (callback) callback(result.replyCnt, result.list);
+            },
+            error: function(xhr, status, err) {
+                if (error) error(err);
+            }
+        });
+    }
+
+    // 댓글 삭제
+    function remove(replyid, callback, error) {
+        $.ajax({
+            type: 'delete',
+            url: '/replies/' + replyid,
+            success: function(result) {
+                if (callback) callback(result);
+            },
+            error: function(xhr, status, err) {
+                if (error) error(err);
+            }
+        });
+    }
+
+    // 댓글 단건 조회
+    function get(replyid, callback, error) {
+        $.ajax({
+            type: 'get',
+            url: '/replies/' + replyid,
+            success: function(result) {
+                if (callback) callback(result);
+            },
+            error: function(xhr, status, err) {
+                if (error) error(err);
+            }
+        });
+    }
+
+    // 댓글 수정
+    function update(reply, callback, error) {
+        $.ajax({
+            type: 'put',
+            url: '/replies/' + reply.replyid,
+            data: JSON.stringify(reply),
+            contentType: 'application/json; charset=utf-8',
+            success: function(result) {
+                if (callback) callback(result);
+            },
+            error: function(xhr, status, err) {
+                if (error) error(err);
+            }
+        });
+    }
+
+    // 시간 포맷 변환
     function displayTime(timeValue) {
-
         let today = new Date();
-        let gap = today.getTime() - timeValue;
-
+        let timeGap = today.getTime() - timeValue;
         let dateObj = new Date(timeValue);
-        let str = "";
 
-        if(gap < (1000*60*60*24)) {
+        if (timeGap < 1000 * 60 * 60 * 24) {
             let hh = dateObj.getHours();
             let mi = dateObj.getMinutes();
             let ss = dateObj.getSeconds();
-
-            return [ (hh>9 ? '' : '0')+ hh, ":",
-                (mi>9 ? '':'0')+ mi, ":",
-                (ss>9 ? '':'0')+ ss
-                ].join('');
-        }else{
+            return [(hh > 9 ? '' : '0') + hh, ":", (mi > 9 ? '' : '0') + mi, ":", (ss > 9 ? '' : '0') + ss].join('');
+        } else {
             let yy = dateObj.getFullYear();
-            let mm = dateObj.getMonth()+1;
+            let mm = dateObj.getMonth() + 1;
             let dd = dateObj.getDate();
-
-            return [
-                yy, '/', (mm>9 ? '' : '0')+ mm, '/', (dd>9 ? '':'0')+dd
-            ].join('');
+            return [yy, '/', (mm > 9 ? '' : '0') + mm, '/', (dd > 9 ? '' : '0') + dd].join('');
         }
-    }//end displayTime
+    }
 
-    
-
+    // 공개 API
     return {
-        add : add,
-        getList : getList, 
-        remove : remove,
-        get : get,
-        update : update,
-        displayTime : displayTime
+        add: add,
+        getList: getList,
+        remove: remove,
+        get: get,
+        update: update,
+        displayTime: displayTime
     };
+
 })();

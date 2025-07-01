@@ -2,7 +2,7 @@ package com.simplane.controller;
 
 import com.simplane.domain.Criteria;
 import com.simplane.domain.ReplyVO;
-import com.simplane.dto.ReplyPageDTO;
+import com.simplane.domain.ReplyPageDTO;
 import com.simplane.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +21,7 @@ public class ReplyController {
     private final ReplyService replyService;
 
     @PostMapping(value = "/new")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<String> create(@RequestBody ReplyVO vo){ //@RequestBody -> json형식으로 받겠다
         log.info("ReplyVO : " + vo);
 
@@ -58,7 +59,7 @@ public class ReplyController {
     }
 
     // 댓글 데이터 수정
-    //@PreAuthorize("principal.username == #vo.replyer")
+    @PreAuthorize("principal.username == #vo.replyer")
     @RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH},
             value = "/{replyid}", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
     public ResponseEntity<String> modify(@RequestBody ReplyVO vo, @PathVariable("replyid") Long replyid){
@@ -70,8 +71,9 @@ public class ReplyController {
                 : new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @PreAuthorize("principal.username == #vo.replyer")
     @DeleteMapping(value = "/{replyid}", produces = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<String> remove(/*@RequestBody ReplyVO vo, */@PathVariable("replyid")Long replyid){
+    public ResponseEntity<String> remove(@RequestBody ReplyVO vo, @PathVariable("replyid")Long replyid){
         log.info("remove : " + replyid);
 
         //replyid로 댓글 삭제, 댓글삭제시 replyid만 필요함

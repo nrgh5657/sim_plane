@@ -17,7 +17,7 @@
             <tr>
                 <th>작성자</th>
                 <td>
-                    <input type="text" name="writer" style="width: 100%;">
+                    <input name="writer" value='<sec:authentication property="principal.username"/>' readonly="readonly">
                 </td>
             </tr>
             <tr>

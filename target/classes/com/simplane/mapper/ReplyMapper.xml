@@ -31,4 +31,7 @@
         LIMIT #{cri.amount} OFFSET #{cri.offset}
     </select>
 
+    <select id="getCountByTestid" resultType="int">
+        select count(replyid) from sim_reply where testid = #{testid}
+    </select>
 </mapper>

@@ -7,6 +7,7 @@ import com.simplane.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +47,7 @@ public class BoardController {
 
     // 데이터 수정
     @PostMapping("/modify")
+    @PreAuthorize("principal.username == #board.writer")
     public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
         log.info("modify.....2");
         log.info("service is null? " + (service == null));
@@ -69,6 +71,7 @@ public class BoardController {
     }
 
     @PostMapping("/register")
+    @PreAuthorize("isAuthenticated()")
     public String register(BoardVO boardVO, RedirectAttributes rttr) {
         log.info("register.....");
         service.register(boardVO);
@@ -77,8 +80,9 @@ public class BoardController {
     }
 
     @PostMapping("/remove")
+    @PreAuthorize("principal.username == #writer")
     public String remove(@RequestParam("boardid") Long boardid, @ModelAttribute("cri") Criteria cri ,
-                         RedirectAttributes rttr) {
+                         RedirectAttributes rttr, String writer) {
         log.info("remove..." + boardid);
 //        log.info("remove...writer..." + writer);
 
@@ -89,6 +93,7 @@ public class BoardController {
     }
 
     @GetMapping("/register")
+    @PreAuthorize("isAuthenticated()")
     public void register(){
     }
 

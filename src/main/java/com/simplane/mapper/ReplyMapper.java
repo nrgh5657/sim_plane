@@ -19,4 +19,6 @@ public interface ReplyMapper {
 
     public int delete(Long replyid); // 댓글 삭제
 
+    public int getCountByTestid(Long testid);
+
 }
