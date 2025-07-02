@@ -8,5 +8,10 @@
         SELECT * FROM sim_test ORDER BY testid DESC
     </select>
 
+    <insert id="insertTest" useGeneratedKeys="true" keyProperty="testid" keyColumn="testid">
+        INSERT INTO sim_test (testname)
+        VALUES (#{testName})
+    </insert>
+
 
 </mapper>

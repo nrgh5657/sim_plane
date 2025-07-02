@@ -14,4 +14,6 @@ public interface QuestionMapper {
 
     boolean existsQuestionAfter(@Param("testid") Long testid, @Param("q_index") int currentIndex);
 
+    // 질문 삽입
+    void insertQuestion(QuestionVO question);
 }

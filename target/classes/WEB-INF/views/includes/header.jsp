@@ -118,6 +118,9 @@
             <li><a href="#">궁합</a></li>
             <li><a href="#">포춘쿠키</a></li>
             <li><a href="/board/list">문의게시판</a></li>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <li><a href="/test/createTest">테스트생성</a></li>
+            </sec:authorize>
         </ul>
     </nav>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

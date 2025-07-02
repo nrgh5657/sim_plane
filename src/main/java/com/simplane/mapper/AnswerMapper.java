@@ -9,4 +9,7 @@ public interface AnswerMapper {
     List<AnswerVO> readAnswerByQuestionId(Long questionId);
 
     AnswerVO readAnswerByAnswerId(Long answerId);
+
+    // 답변 삽입
+    void insertAnswer(AnswerVO answer);
 }

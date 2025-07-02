@@ -19,4 +19,9 @@
         )
     </select>
 
+    <insert id="insertQuestion" useGeneratedKeys="true" keyProperty="questionid" keyColumn="questionid">
+        INSERT INTO sim_question (testid, question, q_index)
+        VALUES (#{testid}, #{question}, #{q_index})
+    </insert>
+
 </mapper>

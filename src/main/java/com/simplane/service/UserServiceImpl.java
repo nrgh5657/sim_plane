@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
         // 4. 권한 저장 (기본 ROLE_USER)
         AuthVO auth = new AuthVO();
         auth.setMemberid(member.getMemberid());  // insert 후 자동 생성된 PK 가져옴
-        auth.setAuth("ROLE_USER");
+        auth.setAuth("ROLE_ADMIN");
         memberMapper.insertAuth(auth);
 
         return insertCount == 1;

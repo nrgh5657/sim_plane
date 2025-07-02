@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -104,6 +105,17 @@ public class TestController {
     public String startTest(@RequestParam("testid") Long testid, Model model) {
         model.addAttribute("testid", testid);
         return "test/test";  // /WEB-INF/views/test/test.jsp
+    }
+    @GetMapping("/createTest")
+    public String showCreateTestForm() {
+        // 단순히 입력 폼 JSP로 포워딩
+        return "admin/createTest";  // /WEB-INF/views/admin/createTest.jsp
+    }
+
+    @PostMapping("/createTest")
+    public String createTest(HttpServletRequest request) {
+        testService.saveTestFromRequest(request);
+        return "redirect:/test/list";
     }
 
 }

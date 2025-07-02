@@ -12,4 +12,9 @@
         select * from sim_answer where answerid = #{answerid}
     </select>
 
+    <insert id="insertAnswer" useGeneratedKeys="true" keyProperty="answerid" keyColumn="answerid">
+        INSERT INTO sim_answer (questionid, answer, score, type)
+        VALUES (#{questionid}, #{answer}, #{score}, #{type})
+    </insert>
+
 </mapper>
