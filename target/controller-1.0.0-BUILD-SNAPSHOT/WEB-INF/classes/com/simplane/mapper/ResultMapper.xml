@@ -18,4 +18,8 @@
         VALUES (#{testid}, #{totalScore}, #{resultType}, #{result})
     </insert>
 
+    <delete id="deleteResultsByTestId">
+        DELETE FROM sim_result WHERE testid = #{testid}
+    </delete>
+
 </mapper>

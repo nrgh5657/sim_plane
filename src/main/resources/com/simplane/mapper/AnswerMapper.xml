@@ -17,4 +17,8 @@
         VALUES (#{questionid}, #{answer}, #{score}, #{type})
     </insert>
 
+    <delete id="deleteAnswersByQuestionId">
+        DELETE FROM sim_answer WHERE questionid = #{questionid}
+    </delete>
+
 </mapper>

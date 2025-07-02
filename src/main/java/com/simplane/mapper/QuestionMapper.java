@@ -16,4 +16,8 @@ public interface QuestionMapper {
 
     // 질문 삽입
     void insertQuestion(QuestionVO question);
+
+    List<QuestionVO> getQuestionsByTestId(int testid);
+
+    void deleteQuestionsByTestId(int testid);
 }

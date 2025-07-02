@@ -7,10 +7,7 @@ import com.simplane.domain.TestVO;
 import com.simplane.dto.AnswerSubmitDTO;
 import com.simplane.dto.QuestionDTO;
 import com.simplane.mapper.ResultMapper;
-import com.simplane.service.AnswerService;
-import com.simplane.service.QuestionService;
-import com.simplane.service.TestService;
-import com.simplane.service.TestServiceImpl;
+import com.simplane.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.springframework.http.HttpStatus;
@@ -21,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -33,6 +31,7 @@ public class TestController {
     private final AnswerService answerService;
     private final ResultMapper resultMapper;
     private final TestService testService;
+    private final UserService userService;
 
     @GetMapping("/question")
     public ResponseEntity<QuestionDTO> getQuestion(
@@ -117,5 +116,17 @@ public class TestController {
         testService.saveTestFromRequest(request);
         return "redirect:/test/list";
     }
+
+    @PostMapping("/deleteTest")
+    public String deleteTest(@RequestParam("testid") int testid, Principal principal) {
+        // 선택적으로 관리자 권한 이중 확인
+        if (!userService.isAdmin(principal.getName())) {
+            return "redirect:/access-denied";
+        }
+
+        testService.deleteTestById(testid);
+        return "redirect:/test/list";
+    }
+
 
 }

@@ -34,4 +34,8 @@
     <select id="getCountByTestid" resultType="int">
         select count(replyid) from sim_reply where testid = #{testid}
     </select>
+
+    <delete id="deleteResultsByTestId">
+        DELETE FROM sim_result WHERE testid = #{testid}
+    </delete>
 </mapper>

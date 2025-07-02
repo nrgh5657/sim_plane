@@ -13,5 +13,9 @@
         VALUES (#{testName})
     </insert>
 
+    <delete id="deleteTest">
+        DELETE FROM sim_test WHERE testid = #{testid}
+    </delete>
+
 
 </mapper>

@@ -24,4 +24,12 @@
         VALUES (#{testid}, #{question}, #{q_index})
     </insert>
 
+    <select id="getQuestionsByTestId" resultType="com.simplane.domain.QuestionVO">
+        SELECT * FROM sim_question WHERE testid = #{testid}
+    </select>
+
+    <delete id="deleteQuestionsByTestId">
+        DELETE FROM sim_question WHERE testid = #{testid}
+    </delete>
+
 </mapper>

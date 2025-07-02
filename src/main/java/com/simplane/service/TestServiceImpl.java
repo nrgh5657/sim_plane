@@ -10,6 +10,7 @@ import com.simplane.mapper.ResultMapper;
 import com.simplane.mapper.TestMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -85,5 +86,26 @@ public class TestServiceImpl implements TestService {
                 resultMapper.insertResult(result);
             }
         }
+    }
+
+    @Transactional
+    @Override
+    public void deleteTestById(int testid) {
+        // 1. 해당 테스트의 질문 목록 조회
+        List<QuestionVO> questions = questionMapper.getQuestionsByTestId(testid);
+
+        // 2. 각 질문에 대한 답변 삭제
+        for (QuestionVO question : questions) {
+            answerMapper.deleteAnswersByQuestionId(question.getQuestionid());
+        }
+
+        // 3. 질문 삭제
+        questionMapper.deleteQuestionsByTestId(testid);
+
+        // 4. 결과 삭제
+        resultMapper.deleteResultsByTestId(testid);
+
+        // 5. 테스트 삭제
+        testMapper.deleteTest(testid);
     }
 }

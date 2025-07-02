@@ -16,10 +16,5 @@ public interface TestMapper {
     void insertTest(TestVO test);
 
 
-
-
-
-
-
-
+    void deleteTest(int testid);
 }

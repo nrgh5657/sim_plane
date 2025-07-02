@@ -12,4 +12,6 @@ public interface AnswerMapper {
 
     // 답변 삽입
     void insertAnswer(AnswerVO answer);
+
+    void deleteAnswersByQuestionId(Long questionid);
 }

@@ -9,4 +9,6 @@ public interface ResultMapper {
 
     // 결과 삽입
     void insertResult(ResultVO result);
+
+    void deleteResultsByTestId(int testid);
 }

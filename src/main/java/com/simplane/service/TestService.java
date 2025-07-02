@@ -10,4 +10,6 @@ public interface TestService {
     List<TestVO> getAllTests();
 
     void saveTestFromRequest(HttpServletRequest request);
+
+    void deleteTestById(int testid);
 }
